@@ -1,4 +1,5 @@
 let selectedFile;
+let copyText;
 document.getElementById("fileUpload").addEventListener("change", (event) => {
     selectedFile = event.target.files[0];
 });
@@ -21,6 +22,8 @@ document.getElementById("uploadExcel").addEventListener("click", () => {
                 let jsonObject = JSON.stringify(rowObject);
                 document.getElementById("jsonData").innerHTML = jsonObject;
                 console.log(jsonObject);
+                copyText = jsonObject
+                
             });
         };
         fileReader.readAsBinaryString(selectedFile);
@@ -28,3 +31,15 @@ document.getElementById("uploadExcel").addEventListener("click", () => {
         alert('Please, pick a file')
     }
 });
+
+const copyClip = async () => {
+    try {
+        // Copy the text to the clipboard
+        await navigator.clipboard.writeText(copyText);
+
+        // Optionally, you can display a message to the user
+        alert("Text copied to clipboard: ");
+    } catch (err) {
+        console.error("Failed to copy: ", err);
+    }
+}
