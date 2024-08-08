@@ -21,9 +21,9 @@ document.getElementById("uploadExcel").addEventListener("click", () => {
                 );
                 let jsonObject = JSON.stringify(rowObject);
                 document.getElementById("jsonData").innerHTML = jsonObject;
-                console.log(jsonObject);
+                // console.log(jsonObject);
                 copyText = jsonObject
-                
+                copyBtn.style.display = 'block'
             });
         };
         fileReader.readAsBinaryString(selectedFile);
@@ -38,7 +38,7 @@ const copyClip = async () => {
         await navigator.clipboard.writeText(copyText);
 
         // Optionally, you can display a message to the user
-        alert("Text copied to clipboard: ");
+        alert("Text copied to clipboard");
     } catch (err) {
         console.error("Failed to copy: ", err);
     }
