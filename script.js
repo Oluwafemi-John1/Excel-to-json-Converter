@@ -4,13 +4,14 @@ document.getElementById("fileUpload").addEventListener("change", (event) => {
 });
 
 document.getElementById("uploadExcel").addEventListener("click", () => {
+
     if (selectedFile) {
         console.log("hi");
         var fileReader = new FileReader();
-        fileReader.onload = function (event) {
-            var data = event.target.result;
+        fileReader.onload = (event) => {
+            let data = event.target.result;
 
-            var workbook = XLSX.read(data, {
+            let workbook = XLSX.read(data, {
                 type: "binary",
             });
             workbook.SheetNames.forEach((sheet) => {
@@ -23,5 +24,7 @@ document.getElementById("uploadExcel").addEventListener("click", () => {
             });
         };
         fileReader.readAsBinaryString(selectedFile);
+    } else {
+        alert('Please, pick a file')
     }
 });
